@@ -14,22 +14,22 @@ import net.act_2;
 
 public class C0EPacketClickWindow
 implements Packet<INetHandlerPlayServer> {
-    private int g;
-    private int e;
-    private int a;
-    private short b;
-    private int d;
+    private int mode;
+    private int usedButton;
+    private int windowId;
+    private short actionNumber;
+    private int slotId;
     private boolean f;
-    private ItemStack c;
+    private ItemStack clickedItem;
 
     @Override
     public void writePacketData(PacketBuffer packetBuffer) throws IOException {
-        PacketBufferInvoker.c(packetBuffer, this.a);
-        PacketBufferInvoker.g(packetBuffer, this.d);
-        PacketBufferInvoker.c(packetBuffer, this.e);
-        PacketBufferInvoker.g(packetBuffer, this.b);
-        PacketBufferInvoker.c(packetBuffer, this.g);
-        PacketBufferInvoker.a(packetBuffer, this.c);
+        PacketBufferInvoker.c(packetBuffer, this.windowId);
+        PacketBufferInvoker.g(packetBuffer, this.slotId);
+        PacketBufferInvoker.c(packetBuffer, this.usedButton);
+        PacketBufferInvoker.g(packetBuffer, this.actionNumber);
+        PacketBufferInvoker.c(packetBuffer, this.mode);
+        PacketBufferInvoker.a(packetBuffer, this.clickedItem);
     }
 
     public boolean c() {
@@ -37,23 +37,23 @@ implements Packet<INetHandlerPlayServer> {
     }
 
     public boolean d() {
-        return this.g == 2;
+        return this.mode == 2;
     }
 
     public void a(ItemStack itemStack) {
-        this.c = itemStack;
+        this.clickedItem = itemStack;
     }
 
     public void c(int n) {
-        this.e = n;
+        this.usedButton = n;
     }
 
     public void d(int n) {
-        this.g = n;
+        this.mode = n;
     }
 
     public void a(short s) {
-        this.b = s;
+        this.actionNumber = s;
     }
 
     public void a(INetHandlerPlayServer iNetHandlerPlayServer) {
@@ -64,71 +64,71 @@ implements Packet<INetHandlerPlayServer> {
     }
 
     public int k() {
-        return this.e;
+        return this.usedButton;
     }
 
     public void b(int n) {
-        this.d = n;
+        this.slotId = n;
     }
 
     public int a() {
-        return this.g;
+        return this.mode;
     }
 
     public ItemStack h() {
-        return this.c;
+        return this.clickedItem;
     }
 
     public boolean f() {
-        return this.a == 0 && (this.g() || this.e() || this.d() || this.b());
+        return this.windowId == 0 && (this.g() || this.e() || this.d() || this.b());
     }
 
     public boolean b() {
-        return this.e == 0 && this.g == 1;
+        return this.usedButton == 0 && this.mode == 1;
     }
 
     public boolean e() {
-        return this.e == 2 && this.g == 3;
+        return this.usedButton == 2 && this.mode == 3;
     }
 
     public C0EPacketClickWindow(int n, int n2, int n3, int n4, ItemStack itemStack, short s) {
-        this.a = n;
-        this.d = n2;
-        this.e = n3;
-        this.c = act_2.C(itemStack);
-        this.b = s;
-        this.g = n4;
+        this.windowId = n;
+        this.slotId = n2;
+        this.usedButton = n3;
+        this.clickedItem = act_2.C(itemStack);
+        this.actionNumber = s;
+        this.mode = n4;
         this.f = false;
     }
 
     public short i() {
-        return this.b;
+        return this.actionNumber;
     }
 
     public void a(int n) {
-        this.a = n;
+        this.windowId = n;
     }
 
     public int l() {
-        return this.d;
+        return this.slotId;
     }
 
     public boolean g() {
-        return (this.e == 1 || this.e == 0) && this.g == 4;
+        return (this.usedButton == 1 || this.usedButton == 0) && this.mode == 4;
     }
 
     @Override
     public void readPacketData(PacketBuffer packetBuffer) throws IOException {
-        this.a = PacketBufferInvoker.l(packetBuffer);
-        this.d = PacketBufferInvoker.k(packetBuffer);
-        this.e = PacketBufferInvoker.l(packetBuffer);
-        this.b = PacketBufferInvoker.k(packetBuffer);
-        this.g = PacketBufferInvoker.l(packetBuffer);
-        this.c = PacketBufferInvoker.g(packetBuffer);
+        this.windowId = PacketBufferInvoker.l(packetBuffer);
+        this.slotId = PacketBufferInvoker.k(packetBuffer);
+        this.usedButton = PacketBufferInvoker.l(packetBuffer);
+        this.actionNumber = PacketBufferInvoker.k(packetBuffer);
+        this.mode = PacketBufferInvoker.l(packetBuffer);
+        this.clickedItem = PacketBufferInvoker.g(packetBuffer);
     }
 
     public int j() {
-        return this.a;
+        return this.windowId;
     }
 }
 
